@@ -2,13 +2,22 @@
   <div class="hello">
     <img alt="logo" src="@/assets/img/patmat01.jpeg">
     <h1>{{ msg }}</h1>
-    <el-button @click="$router.push('/result')">
-      누르면 Result Page로 이동
-    </el-button>
+    <div>
+      <el-button @click="$router.push('/result')">
+        누르면 Result Page로 이동
+      </el-button>
+    </div>
+    <div>
+      <el-button @click="getTest">
+        API 호출 테스트
+      </el-button>
+    </div>
   </div>
 </template>
 
 <script>
+import * as axios from '@/api/axios'
+
 export default {
   name: 'MainPage',
   props: {
@@ -17,6 +26,18 @@ export default {
   data() {
     return {
       msg: '패트와 메트'
+    }
+  },
+  methods: {
+    getTest() {
+      axios.getTest()
+          .then((res) => {
+            alert(JSON.stringify(res.data));
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+
     }
   }
 }
